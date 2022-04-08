@@ -1,3 +1,5 @@
+-- -- -- -- CREATE TABLES
+
 DROP TABLE pessoa;
 DROP TABLE cliente;
 DROP TABLE gerente;
@@ -34,7 +36,7 @@ CREATE TABLE gerente (cpf_gerente VARCHAR2(14),
                       CONSTRAINT gerente_cpf_gerente_ck CHECK (cpf_gerente LIKE ('___.___.___-__')));
 
 CREATE TABLE corretor (cpf_corretor VARCHAR2(14),
-                       nome VARCHAR2(50) NOT NULL,
+                       nome VARCHAR2(30) NOT NULL,
                        email VARCHAR2(30) NOT NULL,
                        descricao VARCHAR2(100),
                        ranking NUMBER,
@@ -46,8 +48,8 @@ CREATE TABLE corretor (cpf_corretor VARCHAR2(14),
                        CONSTRAINT cliente_cpf_comitente_ck CHECK (cpf_comitente LIKE ('___.___.___-__')));
 
 CREATE TABLE cliente (cpf_cliente VARCHAR2(14) NOT NULL,
-                      nome VARCHAR2(50) NOT NULL,
-                      email VARCHAR2(40) NOT NULL,
+                      nome VARCHAR2(30) NOT NULL,
+                      email VARCHAR2(30) NOT NULL,
                       descricao VARCHAR2(100) NOT NULL,
                       ranking NUMBER,
                       cpf_auxiliador VARCHAR2(14),
@@ -150,9 +152,9 @@ CREATE TABLE proposta (id_anuncio NUMBER NOT NULL,
                        cpf_cliente VARCHAR2(14),
                        data_proposta DATE NOT NULL,
                        data_pagamento DATE,
-                       valor_pagamento NUMBER NOT NULL,
+                       valor_proposta NUMBER NOT NULL,
                        metodo_pagamento VARCHAR2(10),
-                       status VARCHAR2(11) NOT NULL,
+                       status VARCHAR2(8) NOT NULL,
                        CONSTRAINT proposta_pk PRIMARY KEY (id_anuncio, cpf_anunciante, cpf_cliente),
                        CONSTRAINT proposta_cpf_anunciante_fk FOREIGN KEY (cpf_anunciante) REFERENCES pessoa(cpf),
                        CONSTRAINT proposta_cpf_cliente_fk FOREIGN KEY (cpf_cliente) REFERENCES cliente(cpf_cliente),

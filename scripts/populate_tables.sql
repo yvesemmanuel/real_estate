@@ -1,5 +1,9 @@
+-- -- -- -- -- POPULATE TABLES
+
 -- Pessoas
+INSERT INTO pessoa (cpf, nome, descricao, email, ranking) VALUES ('714.231.312-39', 'Jhonny B Good', 'dictumst maecenas ut massa quis augue luctuscurabitur gravida nisi', 'jbg@ucoz.ru', 1);
 INSERT INTO pessoa (cpf, nome, descricao, email, ranking) VALUES ('053.142.336-88', 'Sheyla Lima', 'Eu sou digital influencer e migrei para o ramo imobiliário', 'sl@gmail.com', 5);
+INSERT INTO pessoa (cpf, nome, descricao, email, ranking) VALUES ('709.714.594-36', 'LeBron James', 'Eu sou o GOAT.', 'lbj@gmail.com', 5);
 INSERT INTO pessoa (cpf, nome, descricao, email, ranking) VALUES ('604.102.780-41', 'Darice', 'platea dictumst morbi vestibulum velit is diamjusto nec te', 'dbevans0@goo.gl', 5);
 INSERT INTO pessoa (cpf, nome, descricao, email, ranking) VALUES ('805.187.870-10', 'Valera', 'vivxipiscing molestie hendre aenean lectus pellentesque', 'vgaven1@i2i.jp', 7);
 INSERT INTO pessoa (cpf, nome, descricao, email, ranking) VALUES ('183.187.110-68', 'Jeane', 'hendre aenean lect', 'jstrond2@pinterest.com', 5);
@@ -61,6 +65,9 @@ VALUES ('763.377.450-94', 'Mateus', 'mateus@gerencia.com.br');
 -- Corretor
 INSERT INTO corretor (cpf_corretor, nome, descricao, email, ranking, creci, cpf_comitente)
 SELECT pessoa.cpf, pessoa.nome, pessoa.descricao, pessoa.email, pessoa.ranking, '35698346', gerente.cpf_gerente FROM pessoa, gerente WHERE cpf = '053.142.336-88' AND cpf_gerente = '763.377.450-94';
+
+INSERT INTO corretor (cpf_corretor, nome, descricao, email, ranking, creci, cpf_comitente)
+SELECT pessoa.cpf, pessoa.nome, pessoa.descricao, pessoa.email, pessoa.ranking, '23123131', NULL FROM pessoa, gerente WHERE cpf = '709.714.594-36';
 
 INSERT INTO corretor (cpf_corretor, nome, descricao, email, ranking, creci, cpf_comitente)
 SELECT pessoa.cpf, pessoa.nome, pessoa.descricao, pessoa.email, pessoa.ranking, '97634710', gerente.cpf_gerente FROM pessoa, gerente WHERE cpf = '604.102.780-41' AND cpf_gerente = '262.748.730-23';
@@ -232,7 +239,7 @@ FROM anuncio WHERE cpf_pessoa = '487.181.460-23';
 
 INSERT INTO anuncio_info (id_anuncio, tipo_anuncio, tipo_imovel, valor, area, qtd_quartos, comissao, descricao)
 SELECT id, 'Venda', 'Casa', 1452459, 54, 3, 7140, 'mi in porttitor pede justo eu masduis at velit eu est congue elementum in hac'
-FROM anuncio WHERE cpf_pessoa = '931.549.820-86';
+FROM anuncio WHERE cpf_pessoa = '931.549.820-86';|
 
 INSERT INTO anuncio_info (id_anuncio, tipo_anuncio, tipo_imovel, valor, area, qtd_quartos, comissao, descricao)
 SELECT id, 'Venda', 'Apartamento', 603438, 65, 2, 4863, 'integer tincidunt ante vel ipsum vestibulum sed magna at nunc commodo'
@@ -277,27 +284,27 @@ FROM anuncio WHERE cpf_pessoa = '049.877.610-76';
 
 
 -- proposta
-INSERT INTO proposta (id_anuncio, cpf_anunciante, cpf_cliente, data_proposta, data_pagamento, valor_pagamento, metodo_pagamento, status)
+INSERT INTO proposta (id_anuncio, cpf_anunciante, cpf_cliente, data_proposta, data_pagamento, valor_proposta, metodo_pagamento, status)
 SELECT anuncio.id, pessoa.cpf, cliente.cpf_cliente, (TO_DATE('2022-03-22 14:00', 'yyyy-mm-dd hh24:mi')), (TO_DATE('2022-03-23 14:00', 'yyyy-mm-dd hh24:mi')), 31231, 'Dinheiro', 'Aceita'
 FROM pessoa, cliente, anuncio WHERE cpf = '987.288.810-87' AND cpf_cliente = '808.424.140-02' AND cpf_pessoa = '987.288.810-87';
 
-INSERT INTO proposta (id_anuncio, cpf_anunciante, cpf_cliente, data_proposta, data_pagamento, valor_pagamento, metodo_pagamento, status)
+INSERT INTO proposta (id_anuncio, cpf_anunciante, cpf_cliente, data_proposta, data_pagamento, valor_proposta, metodo_pagamento, status)
 SELECT anuncio.id, pessoa.cpf, cliente.cpf_cliente, (TO_DATE ('2022-03-21 08:40', 'yyyy-mm-dd hh24:mi')), null, 100000, null, 'Pendente'
 FROM pessoa, cliente, anuncio WHERE cpf = '567.717.780-61' AND cpf_cliente = '248.463.090-53' AND cpf_pessoa = '567.717.780-61';
 
-INSERT INTO proposta (id_anuncio, cpf_anunciante, cpf_cliente, data_proposta, data_pagamento, valor_pagamento, metodo_pagamento, status)
+INSERT INTO proposta (id_anuncio, cpf_anunciante, cpf_cliente, data_proposta, data_pagamento, valor_proposta, metodo_pagamento, status)
 SELECT anuncio.id, pessoa.cpf, cliente.cpf_cliente, (TO_DATE ('2022-03-21 08:40', 'yyyy-mm-dd hh24:mi')), null, 200000, null, 'Recusada'
 FROM pessoa, cliente, anuncio WHERE cpf = '643.188.210-56' AND cpf_cliente = '049.877.610-76' AND cpf_pessoa = '643.188.210-56';
 
-INSERT INTO proposta (id_anuncio, cpf_anunciante, cpf_cliente, data_proposta, data_pagamento, valor_pagamento, metodo_pagamento, status)
+INSERT INTO proposta (id_anuncio, cpf_anunciante, cpf_cliente, data_proposta, data_pagamento, valor_proposta, metodo_pagamento, status)
 SELECT anuncio.id, pessoa.cpf, cliente.cpf_cliente, (TO_DATE ('2022-03-15 10:00', 'yyyy-mm-dd hh24:mi')), (TO_DATE ('2022-03-21 10:00', 'yyyy-mm-dd hh24:mi')), 3231, 'Cartão', 'Aceita'
 FROM pessoa, cliente, anuncio WHERE cpf = '453.223.060-80' AND cpf_cliente = '650.434.980-05' AND cpf_pessoa = '453.223.060-80';
 
-INSERT INTO proposta (id_anuncio, cpf_anunciante, cpf_cliente, data_proposta, data_pagamento, valor_pagamento, metodo_pagamento, status)
+INSERT INTO proposta (id_anuncio, cpf_anunciante, cpf_cliente, data_proposta, data_pagamento, valor_proposta, metodo_pagamento, status)
 SELECT anuncio.id, pessoa.cpf, cliente.cpf_cliente, (TO_DATE ('2022-03-12 14:00', 'yyyy-mm-dd hh24:mi')),  (TO_DATE ('2022-03-14 14:00', 'yyyy-mm-dd hh24:mi')), 3000, 'Dinheiro', 'Aceita'
 FROM pessoa, cliente, anuncio WHERE cpf = '258.986.360-80' AND cpf_cliente = '567.717.780-61' AND cpf_pessoa = '258.986.360-80';
 
-INSERT INTO proposta (id_anuncio, cpf_anunciante, cpf_cliente, data_proposta, data_pagamento, valor_pagamento, metodo_pagamento, status)
+INSERT INTO proposta (id_anuncio, cpf_anunciante, cpf_cliente, data_proposta, data_pagamento, valor_proposta, metodo_pagamento, status)
 SELECT anuncio.id, pessoa.cpf, cliente.cpf_cliente, (TO_DATE ('2022-03-01 10:00', 'yyyy-mm-dd hh24:mi')), (TO_DATE ('2022-03-05 10:00', 'yyyy-mm-dd hh24:mi')), 480000, 'Boleto', 'Aceita'
 FROM pessoa, cliente, anuncio WHERE cpf = '808.424.140-02' AND cpf_cliente = '049.877.610-76' AND cpf_pessoa = '808.424.140-02';
  
@@ -416,14 +423,14 @@ SELECT id, 'Rua 20', 54, 'Boa Viagem', '28146-512', 'Recife' FROM anuncio WHERE 
 
 
 -- dado bancario
-INSERT INTO dado_bancario (cpf_pessoa, banco, agencia, conta) SELECT  cpf , 123, 0134, '52411584-3' FROM pessoa WHERE cpf = '053.142.336-88';
-INSERT INTO dado_bancario (cpf_pessoa, banco, agencia, conta) SELECT  cpf , 456, 0691, '43626600-2' FROM pessoa WHERE cpf = '604.102.780-41';
-INSERT INTO dado_bancario (cpf_pessoa, banco, agencia, conta) SELECT  cpf , 789, 0791, '19854117-4' FROM pessoa WHERE cpf = '805.187.870-10';
+INSERT INTO dado_bancario (cpf_pessoa, banco, agencia, conta) SELECT  cpf , 124, 0134, '52411584-3' FROM pessoa WHERE cpf = '053.142.336-88';
+INSERT INTO dado_bancario (cpf_pessoa, banco, agencia, conta) SELECT  cpf , 121, 0691, '43626600-2' FROM pessoa WHERE cpf = '604.102.780-41';
+INSERT INTO dado_bancario (cpf_pessoa, banco, agencia, conta) SELECT  cpf , 124, 0791, '19854117-4' FROM pessoa WHERE cpf = '805.187.870-10';
 INSERT INTO dado_bancario (cpf_pessoa, banco, agencia, conta) SELECT  cpf , 124, 0396, '33378445-6' FROM pessoa WHERE cpf = '183.187.110-68';
 INSERT INTO dado_bancario (cpf_pessoa, banco, agencia, conta) SELECT  cpf , 121, 0207, '41922756-2' FROM pessoa WHERE cpf = '264.540.320-43';
-INSERT INTO dado_bancario (cpf_pessoa, banco, agencia, conta) SELECT  cpf , 131, 0183, '65584688-3' FROM pessoa WHERE cpf = '119.671.330-85';
-INSERT INTO dado_bancario (cpf_pessoa, banco, agencia, conta) SELECT  cpf , 670, 0240, '86974206-9' FROM pessoa WHERE cpf = '136.004.620-83';
-INSERT INTO dado_bancario (cpf_pessoa, banco, agencia, conta) SELECT  cpf , 980, 0309, '18435263-9' FROM pessoa WHERE cpf = '969.280.940-44';
+INSERT INTO dado_bancario (cpf_pessoa, banco, agencia, conta) SELECT  cpf , 122, 0183, '65584688-3' FROM pessoa WHERE cpf = '119.671.330-85';
+INSERT INTO dado_bancario (cpf_pessoa, banco, agencia, conta) SELECT  cpf , 122, 0240, '86974206-9' FROM pessoa WHERE cpf = '136.004.620-83';
+INSERT INTO dado_bancario (cpf_pessoa, banco, agencia, conta) SELECT  cpf , 122, 0309, '18435263-9' FROM pessoa WHERE cpf = '969.280.940-44';
 
 
 
@@ -552,7 +559,6 @@ INSERT INTO contatos (id_anuncio, num, cpf_pessoa)
 SELECT id, '(48) 9 8344-2347', cpf_pessoa FROM anuncio WHERE cpf_pessoa = '049.877.610-76';
 
 
-
 -- Agendar visita
 INSERT INTO agendar_visita (id_anuncio, cpf_pessoa, cpf_cliente, data)
 SELECT  anuncio.id, anuncio.cpf_pessoa, cliente.cpf_cliente, (TO_DATE('2022-03-22 14:00', 'yyyy-mm-dd hh24:mi')) FROM anuncio, cliente WHERE cpf_pessoa = '643.188.210-56' AND cpf_cliente = '567.717.780-61';
@@ -573,19 +579,34 @@ SELECT  anuncio.id, anuncio.cpf_pessoa, cliente.cpf_cliente, (TO_DATE('2022-03-2
 
 -- Avaliar
 INSERT INTO avaliar(cpf_avaliado, cpf_avaliador, avaliacao, data)
-SELECT cpf, '053.142.336-88', 8, (TO_DATE('2022-03-27 14:00', 'yyyy-mm-dd hh24:mi')) FROM pessoa WHERE cpf = '678.552.160-22';
+SELECT cpf, '053.142.336-88', 1, (TO_DATE('2022-03-27 14:00', 'yyyy-mm-dd hh24:mi')) FROM pessoa WHERE cpf = '678.552.160-22';
+
+INSERT INTO avaliar(cpf_avaliado, cpf_avaliador, avaliacao, data)
+SELECT cpf, '053.142.336-88', 2, (TO_DATE('2022-03-27 14:00', 'yyyy-mm-dd hh24:mi')) FROM pessoa WHERE cpf = '709.714.594-36';
+
+INSERT INTO avaliar(cpf_avaliado, cpf_avaliador, avaliacao, data)
+SELECT cpf, '604.102.780-41', 3, (TO_DATE('2022-03-27 14:00', 'yyyy-mm-dd hh24:mi')) FROM pessoa WHERE cpf = '709.714.594-36';
+
+INSERT INTO avaliar(cpf_avaliado, cpf_avaliador, avaliacao, data)
+SELECT cpf, '183.187.110-68', 2, (TO_DATE('2022-03-27 14:00', 'yyyy-mm-dd hh24:mi')) FROM pessoa WHERE cpf = '709.714.594-36';
 
 INSERT INTO avaliar(cpf_avaliado, cpf_avaliador, avaliacao, data) 
-SELECT cpf, '604.102.780-41', 8, (TO_DATE('2022-03-27 14:00', 'yyyy-mm-dd hh24:mi')) FROM pessoa WHERE cpf = '567.717.780-61';
+SELECT cpf, '604.102.780-41', 2, (TO_DATE('2022-03-27 14:00', 'yyyy-mm-dd hh24:mi')) FROM pessoa WHERE cpf = '567.717.780-61';
 
 INSERT INTO avaliar(cpf_avaliado, cpf_avaliador, avaliacao, data) 
 SELECT cpf, '805.187.870-10', 8, (TO_DATE('2022-03-27 14:00', 'yyyy-mm-dd hh24:mi')) FROM pessoa WHERE cpf = '193.341.690-44';
 
 INSERT INTO avaliar(cpf_avaliado, cpf_avaliador, avaliacao, data) 
-SELECT cpf, '183.187.110-68', 8, (TO_DATE('2022-03-27 14:00', 'yyyy-mm-dd hh24:mi')) FROM pessoa WHERE cpf = '496.561.730-40';
+SELECT cpf, '193.341.690-44', 2, (TO_DATE('2022-03-27 14:00', 'yyyy-mm-dd hh24:mi')) FROM pessoa WHERE cpf = '805.187.870-10';
 
 INSERT INTO avaliar(cpf_avaliado, cpf_avaliador, avaliacao, data) 
-SELECT cpf, '264.540.320-43', 8, (TO_DATE('2022-03-27 14:00', 'yyyy-mm-dd hh24:mi')) FROM pessoa WHERE cpf = '167.282.720-54';
+SELECT cpf, '193.341.690-44', 2, (TO_DATE('2022-03-27 14:00', 'yyyy-mm-dd hh24:mi')) FROM pessoa WHERE cpf = '496.561.730-40';
+
+INSERT INTO avaliar(cpf_avaliado, cpf_avaliador, avaliacao, data) 
+SELECT cpf, '183.187.110-68', 5, (TO_DATE('2022-03-27 14:00', 'yyyy-mm-dd hh24:mi')) FROM pessoa WHERE cpf = '496.561.730-40';
+
+INSERT INTO avaliar(cpf_avaliado, cpf_avaliador, avaliacao, data) 
+SELECT cpf, '264.540.320-43', 4, (TO_DATE('2022-03-27 14:00', 'yyyy-mm-dd hh24:mi')) FROM pessoa WHERE cpf = '167.282.720-54';
 
 
 
